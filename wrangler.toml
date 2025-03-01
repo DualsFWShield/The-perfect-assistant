@@ -1,0 +1,28 @@
+name = "personal-assistant"
+main = "src/backend/worker.js"
+compatibility_date = "2023-10-30"
+
+[vars]
+# Ces variables seront remplacées par votre interface de configuration
+# Aucune sensible ne doit être écrite ici
+ALLOWED_ORIGIN = "https://your-pwa-domain.com"
+
+# Triggers Cron pour les tâches planifiées
+[triggers]
+crons = ["0 0 * * *", "0 * * * *", "0 2 * * 0"]
+
+# Dev environment (accès local pour le développement)
+[env.dev]
+workers_dev = true
+
+# Production environment
+[env.production]
+workers_dev = false
+route = { pattern = "api.yourdomain.com/*", zone_id = "your-zone-id" }
+
+# Variables par environnement (à compléter via l'interface Cloudflare)
+[env.production.vars]
+ENV = "production"
+
+# Secret Environment Variables (gérés via l'interface Cloudflare)
+# wrangler secret put ASSISTANT_CONFIG

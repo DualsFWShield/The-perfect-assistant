@@ -1,0 +1,269 @@
+/* Styles généraux */
+:root {
+  --primary-color: #3498db;
+  --secondary-color: #2ecc71;
+  --accent-color: #e74c3c;
+  --dark-color: #2c3e50;
+  --light-color: #ecf0f1;
+  --text-color: #333333;
+  --success-color: #27ae60;
+  --warning-color: #f39c12;
+  --error-color: #e74c3c;
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --border-radius: 8px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', sans-serif;
+  color: var(--text-color);
+  line-height: 1.6;
+  background-color: #f5f7fa;
+  padding-bottom: 60px;
+}
+
+/* Header */
+header {
+  background-color: white;
+  box-shadow: var(--shadow);
+  padding: 15px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo img {
+  height: 36px;
+}
+
+.logo h1 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--dark-color);
+}
+
+.user-section {
+  /* Styles gérés par le composant auth-component */
+}
+
+/* Main Content */
+main {
+  max-width: 1200px;
+  margin: 30px auto;
+  padding: 0 20px;
+}
+
+.welcome-section {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.welcome-section h2 {
+  color: var(--dark-color);
+  margin-bottom: 12px;
+}
+
+.welcome-section p {
+  color: #666;
+  max-width: 600px;
+  margin: 0 auto 20px;
+}
+
+.status-indicator {
+  display: flex;
+  justify-content: center;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  padding: 5px 12px;
+  border-radius: 20px;
+}
+
+.status.online {
+  background-color: rgba(46, 204, 113, 0.15);
+  color: var(--success-color);
+}
+
+.status.offline {
+  background-color: rgba(243, 156, 18, 0.15);
+  color: var(--warning-color);
+}
+
+.status .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.status.online .dot {
+  background-color: var(--success-color);
+}
+
+.status.offline .dot {
+  background-color: var(--warning-color);
+}
+
+/* Assistant Section */
+.assistant-section {
+  margin-bottom: 40px;
+}
+
+/* Examples Section */
+.examples-section {
+  padding: 30px;
+  background-color: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  margin-bottom: 40px;
+}
+
+.examples-section h3 {
+  margin-bottom: 20px;
+  text-align: center;
+  color: var(--dark-color);
+}
+
+.command-examples {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.example {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: var(--border-radius);
+  border-left: 3px solid var(--primary-color);
+  transition: transform 0.2s;
+}
+
+.example:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow);
+}
+
+.example .icon {
+  font-size: 24px;
+  margin-right: 15px;
+}
+
+.example .text {
+  font-size: 15px;
+  color: #555;
+}
+
+/* Footer */
+footer {
+  background-color: var(--dark-color);
+  color: white;
+  padding: 20px;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.footer-content {
+  max-width: 800px;
+  margin: 0 auto;
+  font-size: 14px;
+}
+
+.footer-content p {
+  margin-bottom: 5px;
+}
+
+.security-notice {
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .command-examples {
+    grid-template-columns: 1fr;
+  }
+  
+  .example {
+    padding: 12px;
+  }
+  
+  .welcome-section h2 {
+    font-size: 1.5rem;
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.assistant-section {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* PWA installation prompt */
+.pwa-install-prompt {
+  position: fixed;
+  bottom: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: white;
+  padding: 15px 20px;
+  border-radius: var(--border-radius);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 90%;
+  width: 450px;
+  z-index: 1001;
+}
+
+.pwa-install-prompt .install-message {
+  margin-right: 15px;
+}
+
+.pwa-install-prompt .install-button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.pwa-install-prompt .dismiss-button {
+  background: none;
+  border: none;
+  color: #999;
+  margin-left: 10px;
+  cursor: pointer;
+}

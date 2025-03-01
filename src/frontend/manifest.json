@@ -1,0 +1,64 @@
+{
+  "lang": "fr-FR",
+  "name": "Assistant Personnel ZeroConfig",
+  "short_name": "Assistant",
+  "description": "Votre assistant personnel sécurisé avec commandes vocales",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#3498db",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "images/icon-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "images/icon-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Assistant Vocal",
+      "short_name": "Vocal",
+      "description": "Ouvrir l'assistant vocal",
+      "url": "/index.html?mode=voice",
+      "icons": [
+        {
+          "src": "images/voice-icon-96x96.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Configuration",
+      "short_name": "Config",
+      "description": "Paramètres de l'assistant",
+      "url": "/index.html?mode=settings",
+      "icons": [
+        {
+          "src": "images/settings-icon-96x96.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "images/screenshot1.png",
+      "type": "image/png",
+      "sizes": "1280x720"
+    },
+    {
+      "src": "images/screenshot2.png",
+      "type": "image/png",
+      "sizes": "1280x720"
+    }
+  ],
+  "categories": ["productivity", "utilities"]
+}
