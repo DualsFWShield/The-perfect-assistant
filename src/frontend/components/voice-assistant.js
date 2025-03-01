@@ -364,42 +364,55 @@ class VoiceAssistant extends HTMLElement {
       <style>
         :host {
           display: block;
-          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', sans-serif;
+          font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Icons', 'Helvetica Neue', Helvetica, Arial, sans-serif;
           max-width: 600px;
           margin: 0 auto;
+          --apple-blue: #0071e3;
+          --apple-red: #ff3b30;
+          --apple-green: #34c759;
+          --apple-gray: #8e8e93;
+          --apple-light-gray: #f5f5f7;
+          --apple-dark-text: #1d1d1f;
+          --apple-secondary-text: #86868b;
         }
         
         .container {
-          padding: 20px;
-          border-radius: 12px;
-          background: #f9f9f9;
-          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+          padding: 24px;
+          border-radius: 18px;
+          background: #ffffff;
+          box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
         }
         
         h2 {
           margin-top: 0;
-          color: #333;
+          margin-bottom: 24px;
+          color: var(--apple-dark-text);
           text-align: center;
+          font-weight: 600;
+          font-size: 24px;
         }
         
         .control-section {
           display: flex;
           flex-direction: column;
           align-items: center;
-          margin-bottom: 20px;
+          margin-bottom: 28px;
         }
         
         #mic-button {
-          background: #fff;
-          border: 2px solid #3498db;
-          border-radius: 50px;
-          padding: 12px 25px;
-          font-size: 16px;
+          background: var(--apple-blue);
+          border: none;
+          border-radius: 980px;
+          padding: 12px 24px;
+          font-size: 17px;
+          font-weight: 500;
+          color: white;
           cursor: pointer;
-          transition: all 0.3s ease;
+          transition: all 0.2s ease;
           display: flex;
           align-items: center;
           gap: 8px;
+          box-shadow: 0 2px 8px rgba(0, 113, 227, 0.3);
         }
         
         #mic-button span {
@@ -407,88 +420,100 @@ class VoiceAssistant extends HTMLElement {
         }
         
         #mic-button:hover {
-          background: #f0f8ff;
+          background: #0077ed;
+          transform: scale(1.02);
+        }
+        
+        #mic-button:active {
+          transform: scale(0.98);
         }
         
         #mic-button.active {
-          background: #ff6b6b;
-          border-color: #ff6b6b;
-          color: white;
+          background: var(--apple-red);
+          box-shadow: 0 2px 8px rgba(255, 59, 48, 0.3);
         }
         
         .status {
-          margin-top: 10px;
-          font-size: 14px;
-          font-style: italic;
+          margin-top: 12px;
+          font-size: 15px;
+          font-weight: 400;
         }
         
         .status.listening {
-          color: #e74c3c;
+          color: var(--apple-red);
         }
         
         .status.idle {
-          color: #7f8c8d;
+          color: var(--apple-secondary-text);
         }
         
         #interim-text {
-          margin-top: 15px;
-          min-height: 20px;
-          font-size: 16px;
-          color: #666;
+          margin-top: 16px;
+          min-height: 24px;
+          font-size: 17px;
+          color: var(--apple-dark-text);
           text-align: center;
+          font-weight: 400;
         }
         
         #last-command {
-          margin-top: 25px;
-          padding: 15px;
-          background: #f1f1f1;
-          border-radius: 8px;
-          font-size: 14px;
+          margin-top: 28px;
+          padding: 16px;
+          background: var(--apple-light-gray);
+          border-radius: 12px;
+          font-size: 15px;
+        }
+        
+        #last-command strong {
+          font-weight: 600;
+          color: var(--apple-dark-text);
         }
         
         #response {
-          margin-top: 25px;
+          margin-top: 28px;
         }
         
         .response-card {
-          padding: 15px;
-          background: #fff;
-          border-left: 4px solid #2ecc71;
-          border-radius: 4px;
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+          padding: 20px;
+          background: #ffffff;
+          border-radius: 12px;
+          box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+          border-left: 4px solid var(--apple-green);
         }
         
         .command-type {
-          font-weight: bold;
-          font-size: 16px;
-          margin-bottom: 10px;
-          color: #2c3e50;
+          font-weight: 600;
+          font-size: 17px;
+          margin-bottom: 12px;
+          color: var(--apple-dark-text);
         }
         
         .params {
-          margin-bottom: 15px;
+          margin-bottom: 16px;
         }
         
         .param {
-          margin-bottom: 5px;
-          font-size: 14px;
+          margin-bottom: 8px;
+          font-size: 15px;
+          color: var(--apple-dark-text);
         }
         
         .param span {
-          font-weight: 600;
-          color: #3498db;
+          font-weight: 500;
+          color: var(--apple-blue);
         }
         
         .suggestions {
-          margin-top: 15px;
-          border-top: 1px solid #eee;
-          padding-top: 10px;
+          margin-top: 16px;
+          border-top: 1px solid rgba(0, 0, 0, 0.1);
+          padding-top: 16px;
         }
         
         .suggestions h4 {
-          margin: 0 0 10px 0;
-          font-size: 14px;
-          color: #7f8c8d;
+          margin: 0 0 12px 0;
+          font-size: 15px;
+          font-weight: 600;
+          color: var(--apple-secondary-text);
         }
         
         .suggestions ul {
@@ -497,53 +522,80 @@ class VoiceAssistant extends HTMLElement {
         }
         
         .suggestions li {
-          margin-bottom: 5px;
-          font-size: 13px;
+          margin-bottom: 8px;
+          font-size: 15px;
+          color: var(--apple-dark-text);
         }
         
         .offline-response {
-          background: #fff3cd;
-          border-left: 4px solid #ffc107;
-          padding: 15px;
-          border-radius: 4px;
+          background: #fff9e9;
+          border-radius: 12px;
+          padding: 20px;
+          border-left: 4px solid #ff9500;
         }
         
         .offline-icon {
-          font-weight: bold;
-          margin-bottom: 10px;
-          color: #856404;
+          font-weight: 600;
+          margin-bottom: 12px;
+          color: #ff9500;
+          font-size: 15px;
         }
         
         .confirmation {
-          margin-top: 15px;
-          padding: 15px;
-          background: #e8f4fd;
-          border-radius: 8px;
+          margin-top: 20px;
+          padding: 20px;
+          background: #f0f8ff;
+          border-radius: 12px;
+        }
+        
+        .confirmation p {
+          margin-top: 0;
+          margin-bottom: 16px;
+          font-size: 15px;
+          color: var(--apple-dark-text);
         }
         
         .confirmation button {
-          background: #3498db;
+          background: var(--apple-blue);
           color: white;
           border: none;
-          padding: 8px 15px;
-          margin-right: 10px;
-          border-radius: 4px;
+          padding: 8px 18px;
+          margin-right: 12px;
+          border-radius: 980px;
+          font-size: 15px;
+          font-weight: 500;
           cursor: pointer;
+          transition: all 0.2s ease;
+        }
+        
+        .confirmation button:hover {
+          transform: scale(1.05);
+        }
+        
+        .confirmation button:active {
+          transform: scale(0.98);
         }
         
         .confirmation button#confirm-no {
-          background: #95a5a6;
+          background: var(--apple-gray);
         }
         
         #error {
           display: none;
-          margin-top: 15px;
-          padding: 10px;
+          margin-top: 20px;
+          padding: 16px;
           background: #ffecec;
-          color: #e74c3c;
-          border-radius: 4px;
-          font-size: 14px;
+          color: var(--apple-red);
+          border-radius: 12px;
+          font-size: 15px;
           text-align: center;
+          font-weight: 500;
+        }
+        
+        .message {
+          font-size: 15px;
+          line-height: 1.4;
+          color: var(--apple-dark-text);
         }
       </style>
       

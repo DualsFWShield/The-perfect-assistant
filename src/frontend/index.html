@@ -2,18 +2,21 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Assistant Personnel ZeroConfig - Votre assistant vocal personnel sécurisé">
-  <meta name="theme-color" content="#3498db">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="Assistant Personnel - Votre assistant vocal personnel sécurisé">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
   
   <title>Assistant Personnel</title>
   
   <!-- PWA manifest -->
   <link rel="manifest" href="manifest.json">
   
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="images/icon-192x192.png">
-  <link rel="apple-touch-icon" href="images/icon-192x192.png">
+  <!-- Favicon et icônes Apple -->
+  <link rel="icon" type="image/png" href="images/TPA.png">
+  <link rel="apple-touch-icon" href="images/TPA.png">
+  <link rel="apple-touch-startup-image" href="images/TPA.png">
   
   <!-- Localforage pour stockage local -->
   <script src="https://cdn.jsdelivr.net/npm/localforage@1.10.0/dist/localforage.min.js"></script>
@@ -35,8 +38,8 @@
 <body>
   <header>
     <div class="logo">
-      <img src="images/logo.svg" alt="Logo Assistant Personnel">
-      <h1>Assistant Personnel</h1>
+      <img src="images/TPA.png" alt="Logo Assistant Personnel" width="36" height="36">
+      <h1>Assistant</h1>
     </div>
     <div class="user-section">
       <auth-component id="auth"></auth-component>
@@ -45,8 +48,8 @@
   
   <main>
     <section class="welcome-section">
-      <h2>Bienvenue sur votre Assistant Personnel</h2>
-      <p>Gérez vos emails, calendrier et tâches à l'aide de commandes vocales simples.</p>
+      <h2>Votre assistant personnel</h2>
+      <p>Gérez vos emails, calendrier et tâches avec des commandes vocales simples et intuitives.</p>
       <div class="status-indicator">
         <div class="status online">
           <span class="dot"></span>
@@ -80,8 +83,8 @@
   
   <footer>
     <div class="footer-content">
-      <p>Assistant Personnel ZeroConfig - Version 1.0.0</p>
-      <p>Utilisant Gemini 1.5 Flash & Cloudflare Workers</p>
+      <p>Assistant Personnel • Version 1.0</p>
+      <p>Propulsé par Gemini 1.5 Flash</p>
       <p class="security-notice">🔒 Toutes les données sont chiffrées localement</p>
     </div>
   </footer>

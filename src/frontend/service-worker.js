@@ -13,9 +13,7 @@ const CACHE_ASSETS = [
   '/styles.css',
   '/components/auth-component.js',
   '/components/voice-assistant.js',
-  '/images/logo.svg',
-  '/images/icon-192x192.png',
-  '/images/icon-512x512.png',
+  '/images/TPA.png',
   'https://cdn.jsdelivr.net/npm/localforage@1.10.0/dist/localforage.min.js',
   'https://cdn.jsdelivr.net/npm/crypto-js@4.1.1/crypto-js.min.js',
   'https://cdn.jsdelivr.net/npm/preact@10.13.2/dist/preact.min.js',
@@ -128,8 +126,8 @@ self.addEventListener('push', event => {
     
     const options = {
       body: data.body || 'Notification de votre assistant personnel',
-      icon: '/images/icon-192x192.png',
-      badge: '/images/notification-badge.png',
+      icon: '/images/TPA.png',
+      badge: '/images/TPA.png',
       vibrate: [100, 50, 100],
       data: {
         url: data.url || '/'

@@ -1,8 +1,8 @@
 /**
- * ZeroConfig Personal Assistant - Composant d'authentification
+ * Assistant Personnel - Composant d'authentification
  * 
  * Un composant web qui gère l'authentification via Google OAuth
- * sans besoin de mot de passe (magic link)
+ * Style inspiré du design Apple
  */
 
 class AuthComponent extends HTMLElement {
@@ -178,9 +178,15 @@ class AuthComponent extends HTMLElement {
     errorElem.textContent = message;
     errorElem.style.display = 'block';
     
+    // Animation d'entrée
+    errorElem.style.animation = 'fadeIn 0.3s ease-out forwards';
+    
     // Masquer après 5 secondes
     setTimeout(() => {
-      errorElem.style.display = 'none';
+      errorElem.style.animation = 'fadeOut 0.3s ease-in forwards';
+      setTimeout(() => {
+        errorElem.style.display = 'none';
+      }, 300);
     }, 5000);
   }
   
@@ -195,6 +201,8 @@ class AuthComponent extends HTMLElement {
       userInfo.style.display = 'flex';
       
       // Mettre à jour les informations utilisateur
+      const userInitial = this.userEmail.charAt(0).toUpperCase();
+      this.shadowRoot.querySelector('.user-avatar').textContent = userInitial;
       this.shadowRoot.querySelector('#user-email').textContent = this.userEmail;
     } else {
       authContainer.style.display = 'block';
@@ -204,10 +212,21 @@ class AuthComponent extends HTMLElement {
     // Gestion de l'état de chargement
     if (this.loading) {
       loginButton.disabled = true;
-      loginButton.textContent = 'Connexion en cours...';
+      loginButton.innerHTML = `
+        <div class="spinner"></div>
+        <span>Connexion en cours...</span>
+      `;
     } else {
       loginButton.disabled = false;
-      loginButton.textContent = 'Se connecter avec Google';
+      loginButton.innerHTML = `
+        <svg class="google-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+          <path fill="#FFF" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.615z"/>
+          <path fill="#FFF" d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 0 0 9 18z"/>
+          <path fill="#FFF" d="M3.964 10.71A5.41 5.41 0 0 1 3.682 9c0-.593.102-1.17.282-1.71V4.958H.957A8.996 8.996 0 0 0 0 9c0 1.452.348 2.827.957 4.042l3.007-2.332z"/>
+          <path fill="#FFF" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 0 0 .957 4.958L3.964 7.29C4.672 5.163 6.656 3.58 9 3.58z"/>
+        </svg>
+        <span>Se connecter avec Google</span>
+      `;
     }
   }
   
@@ -233,22 +252,44 @@ class AuthComponent extends HTMLElement {
       <style>
         :host {
           display: block;
-          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', sans-serif;
+          font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', sans-serif;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
+        
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        
+        @keyframes fadeOut {
+          from { opacity: 1; }
+          to { opacity: 0; }
+        }
+        
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
         }
         
         .container {
-          padding: 20px;
-          border-radius: 8px;
-          background: #f9f9f9;
-          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+          padding: 24px;
+          border-radius: 12px;
+          background: white;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+          border: 1px solid rgba(0, 0, 0, 0.1);
           max-width: 400px;
           margin: 0 auto;
         }
         
         h3 {
           margin-top: 0;
-          color: #333;
+          margin-bottom: 16px;
+          color: #1d1d1f;
           text-align: center;
+          font-size: 20px;
+          font-weight: 600;
+          letter-spacing: -0.022em;
         }
         
         .auth-container {
@@ -259,31 +300,55 @@ class AuthComponent extends HTMLElement {
         
         .auth-container p {
           text-align: center;
-          color: #666;
+          color: #86868b;
           margin-bottom: 20px;
+          font-size: 15px;
+          line-height: 1.4;
         }
         
         #login-button {
-          background: #4285F4;
+          background: #0071e3;
           color: white;
           border: none;
           padding: 12px 24px;
-          border-radius: 4px;
-          font-size: 16px;
+          border-radius: 980px;
+          font-size: 15px;
+          font-weight: 500;
           cursor: pointer;
           display: flex;
           align-items: center;
           gap: 10px;
-          transition: background-color 0.3s;
+          transition: all 0.2s ease;
+          font-family: inherit;
         }
         
         #login-button:hover {
-          background: #3367D6;
+          background: #0077ED;
+          transform: scale(1.02);
+        }
+        
+        #login-button:active {
+          transform: scale(0.98);
         }
         
         #login-button:disabled {
-          background: #A4A4A4;
+          background: #999;
           cursor: not-allowed;
+          transform: none;
+        }
+        
+        .google-icon {
+          width: 18px;
+          height: 18px;
+        }
+        
+        .spinner {
+          width: 18px;
+          height: 18px;
+          border: 2px solid rgba(255, 255, 255, 0.3);
+          border-radius: 50%;
+          border-top-color: white;
+          animation: spin 1s linear infinite;
         }
         
         .user-info {
@@ -293,59 +358,67 @@ class AuthComponent extends HTMLElement {
         }
         
         .user-avatar {
-          width: 64px;
-          height: 64px;
+          width: 40px;
+          height: 40px;
           border-radius: 50%;
-          background: #e0e0e0;
+          background: #0071e3;
           display: flex;
           align-items: center;
           justify-content: center;
-          margin-bottom: 15px;
-          font-size: 24px;
-          color: #555;
+          margin-bottom: 12px;
+          font-size: 20px;
+          font-weight: 500;
+          color: white;
         }
         
         .user-details {
           display: flex;
           flex-direction: column;
           align-items: center;
-          margin-bottom: 20px;
+          margin-bottom: 16px;
         }
         
         #user-email {
-          font-weight: bold;
-          margin-bottom: 5px;
+          font-weight: 500;
+          margin-bottom: 4px;
+          color: #1d1d1f;
+          font-size: 15px;
         }
         
         .user-status {
-          color: #4CAF50;
-          font-size: 14px;
+          color: #34c759;
+          font-size: 13px;
+          font-weight: 500;
         }
         
         #logout-button {
-          background: transparent;
-          color: #e74c3c;
-          border: 1px solid #e74c3c;
+          background: none;
+          color: #ff3b30;
+          border: 1px solid #ff3b30;
           padding: 8px 16px;
-          border-radius: 4px;
+          border-radius: 980px;
           cursor: pointer;
-          transition: all 0.3s;
+          font-size: 13px;
+          font-weight: 500;
+          transition: all 0.2s ease;
+          font-family: inherit;
         }
         
         #logout-button:hover {
-          background: #e74c3c;
+          background: #ff3b30;
           color: white;
         }
         
         #error {
           display: none;
-          margin-top: 15px;
-          padding: 10px;
+          margin-top: 16px;
+          padding: 12px 16px;
           background: #ffecec;
-          color: #e74c3c;
-          border-radius: 4px;
+          color: #ff3b30;
+          border-radius: 12px;
           font-size: 14px;
           text-align: center;
+          opacity: 0;
         }
       </style>
       
@@ -355,20 +428,18 @@ class AuthComponent extends HTMLElement {
         <div class="auth-container">
           <p>Connectez-vous pour accéder à votre assistant personnel</p>
           <button id="login-button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+            <svg class="google-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
               <path fill="#FFF" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.615z"/>
               <path fill="#FFF" d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 0 0 9 18z"/>
               <path fill="#FFF" d="M3.964 10.71A5.41 5.41 0 0 1 3.682 9c0-.593.102-1.17.282-1.71V4.958H.957A8.996 8.996 0 0 0 0 9c0 1.452.348 2.827.957 4.042l3.007-2.332z"/>
               <path fill="#FFF" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 0 0 .957 4.958L3.964 7.29C4.672 5.163 6.656 3.58 9 3.58z"/>
             </svg>
-            Se connecter avec Google
+            <span>Se connecter avec Google</span>
           </button>
         </div>
         
         <div class="user-info">
-          <div class="user-avatar">
-            <span>👤</span>
-          </div>
+          <div class="user-avatar"></div>
           <div class="user-details">
             <div id="user-email"></div>
             <div class="user-status">Connecté</div>
