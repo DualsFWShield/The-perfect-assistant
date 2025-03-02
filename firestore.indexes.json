@@ -1,1 +1,13 @@
-[object Object]
+{
+    "indexes": [
+      {
+        "collectionGroup": "voiceCommands",
+        "queryScope": "COLLECTION",
+        "fields": [
+          { "fieldPath": "timestamp", "order": "DESCENDING" },
+          { "fieldPath": "userEmail", "order": "ASCENDING" }
+        ]
+      }
+    ],
+    "fieldOverrides": []
+  }
